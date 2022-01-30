@@ -1,8 +1,8 @@
 <script 
-    lang="typescript"
+    lang="ts"
     context="module"
 >
-    const API_KEY = "123";
+    const API_KEY = "youwontgetmyapikey";
 
     const load = async ({fetch}) => {
         const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
@@ -15,7 +15,7 @@
 
         return {
             props: {
-                popular: data.results
+                movies: data.results
             }
         }
     }
@@ -25,16 +25,16 @@
     }; 
 </script>
 
-<script lang="typescript">
+<script lang="ts">
     import MovieContainer from "../components/movieContainer.svelte";
 
     import type { Movie } from "../types/interfaces";
 
-    let popular: Movie[];
+    let movies: Movie[];
 
     export {
-        popular
+        movies
     }
 </script>
 
-<MovieContainer movies={popular} />
+<MovieContainer movies={movies} />
