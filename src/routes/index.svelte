@@ -1,13 +1,40 @@
-<script lang="typescript">
-    let number: number = 5;
+<script 
+    lang="typescript"
+    context="module"
+>
+    const API_KEY = "123";
 
-    const increament = () => {
-        number ++;
+    const load = async ({fetch}) => {
+        const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
+
+        if(!res.ok){
+            return "lol";
+        }
+
+        const data = await res.json();
+
+        return {
+            props: {
+                popular: data.results
+            }
+        }
+    }
+
+    export {
+        load
+    }; 
+</script>
+
+<script lang="typescript">
+    import MovieContainer from "../components/movieContainer.svelte";
+
+    import type { Movie } from "../types/interfaces";
+
+    let popular: Movie[];
+
+    export {
+        popular
     }
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
-<button on:click={increament}>{number}</button>
-
+<MovieContainer movies={popular} />
