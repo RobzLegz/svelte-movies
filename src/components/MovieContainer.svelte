@@ -14,12 +14,15 @@
 <div class="movies">
     {#each movies as movie}
         <MovieCard movie={movie} />
-    {/each}
+    {/each}``
 </div>
 
 <style>
+    h3{
+        font-size: 20px;
+    }
+
     .movies{
-        widows: 100%;
         display: grid;
         grid-template-columns: repeat(autofit, minmax(250px, 1fr));
         column-gap: 1rem;
